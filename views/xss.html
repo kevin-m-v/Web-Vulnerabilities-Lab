@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--Required Meta tags-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!--Boostrap CSS-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        
+        <title>XSS Simulation</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/carousel/">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    
+        <!--Functions-->
+        <script type="text/javascript"> 
+            function cookieParser(){ 
+                unparsedArr = document.cookie.split(';')
+                userInfo = unparsedArr[0]
+                sessionInfo = unparsedArr[1]
+                currentUser = userInfo.split('=')[1]
+                userWelcome = "Hello " + currentUser + ','
+                document.getElementById("welcome").innerHTML = userWelcome
+            }
+
+            function queryParser() {
+                var query = new URL(window.location).searchParams.get('query')
+                document.getElementById('query-input').value = query
+
+                // SECURE Javascipt
+                // document.getElementById('query-output').innerText = query
+                
+                // UNSECURE Javascript, XSS script injecton query: <img src onerror="alert(document.cookie)">
+                document.getElementById('query-output').innerHTML = query
+            }
+
+            if (document.readyState == 'loading') {
+                document.addEventListener('DOMContentLoaded', queryParser)
+            } else {
+                queryParser()
+            }
+        </script>
+    </head>
+
+<body onload="cookieParser()">
+    <!--Nav Bar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top nav-left">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Web Vulnerabilites Lab</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse flex-d flex-row-reverse nav_right" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <!--Enter Query Prompt-->
+    <section class="container" style="text-align: center;">
+        <div class="block2">
+            <img class="rounded mx-auto -d-block img" src="/cross_site_scripting.png" alt="Photo">
+            <div class="ptext">
+                <span id="welcome"><br></span>
+                <span class="text-justify">Please enter a query:</span>
+            </div>
+        </div>
+    </section>
+    <!--Query-->
+    <section>
+        <div>
+          <form class="search-form" autocomplete="off">
+              <input class="search-input" id="query-input" type="text" name="query" />
+              <button class="search-button" type="submit" role="button">Search</button>
+          </form>
+          <h3 class="ptext" style="padding-bottom: 27px;">You Queried: <span id="query-output" class="ptext"></span></h3>
+        </div>
+    </section>
+</body>
+<footer class="mt-auto text-white-50">
+    <p><a class="text-white">Cybersecurity Lab</a> for common web vulnerabilites, by <a class="text-white">Kevin Valladares</a>.</p>
+</footer>
+</html>

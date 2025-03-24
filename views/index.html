@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--Required Meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!--Boostrap CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <title>Web Vulnerability Lab</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/carousel/">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+</head>
+<body>
+    <!--Nav Bar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top nav-left">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Web Vulnerabilites Lab</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse flex-d flex-row-reverse nav_right" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!--Home Page Title-->
+    <section class="container" style="text-align: center;">
+        <div class="block2">
+            <img class="rounded mx-auto -d-block img" src="/sql_injection.jpg" alt="Photo">
+            <div class="ptext">
+                <span>Welcome to the Lab!<br></span>
+            </div>
+        </div>
+    </section>
+    <!--Create User-->
+    <section>
+        <div>
+            <form action="/api" method="post" style="padding-bottom: 30px; text-align: center;">
+                <h1 class="ptext">Create User:</h1>
+                <input id="1" type="text" name="user">
+                <input id="2" type="text" name="password">
+                <button type="submit">Submit</button>
+            </form>
+            <!--fetch API script-->
+            <script>
+                const user = document.getElementById("1");
+                const password = document.getElementById("2");
+                form.addEventListener('submit', function(e){
+                    e.preventDefault();
+                    console.log([...data])
+                fetch("/api",{
+                    method:"POST",
+                    body: JSON.stringify(data)
+                })
+                .then(res => res.json())
+                .then(data => console.log(data))
+                .then(err => console.log(err))
+            })
+            </script>
+        </div>
+
+        <!--Login-->
+        <div>
+            <form action="/login" method="post" style="padding-bottom: 62px; text-align: center;">
+                <h1 class="ptext">Login:</h1>
+                <input id="3" type="text" name="login_user">
+                <input id="4" type="text" name="login_password">
+                <button type="submit">Submit</button>
+            </form>
+            <!--fetch API script-->
+            <script>
+                const login_user = document.getElementById("3");
+                const login_password = document.getElementById("4");
+                form.addEventListener("submit", function(e){
+                    e.preventDefault();
+                    console.log([...data])
+                fetch("/login",{
+                    method:"POST",
+                    body: JSON.stringify(data)
+                })
+                .then(res => res.json())
+                .then(data => console.log(data))
+                .then(err => console.log(err))
+            })
+            </script>
+        </div>
+    </section>
+</body>
+<footer class="mt-auto text-white-50">
+    <p><a class="text-white">Cybersecurity Lab</a> for common web vulnerabilites, by <a class="text-white">Kevin Valladares</a>.</p>
+</footer>
+
+</html>
