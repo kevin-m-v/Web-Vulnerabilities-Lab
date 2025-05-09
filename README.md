@@ -21,3 +21,8 @@ To fortify our queries against SQLi attacks, we must ensure that user inputs can
 connection.query("INSERT INTO sql_injection (user, password) VALUES (?,?)",
 ```
 Instead of hard-coding the SQL syntax into the JavaScript code, we use a parameterized input that prevents special characters from impacting the SQL query. This will cut off this attack vector from threat actors trying to run custom queries on our database.
+
+## Cross-Site Scripting
+Cross-Site Scripting(XSS) allows a threat actor to inject malicious code into webpages viewed by legitimate users. The attacker can use this vulnerability to execute code that accesses a user's sensitive information. There are three types of XSS attacks: Stored, DOM-Based, and Reflected. The scenario we'll be covering is a Reflected XSS attack.  
+
+In this Reflected XSS attack, the malicious JavaScript code is embedded in a URL that, when clicked by a user, runs on the user's browser and pulls their Session ID from the browser's cookies. 
