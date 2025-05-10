@@ -23,6 +23,8 @@ connection.query("INSERT INTO sql_injection (user, password) VALUES (?,?)",
 Instead of hard-coding the SQL syntax into the JavaScript code, we use a parameterized input that prevents special characters from impacting the SQL query. This will cut off this attack vector from threat actors trying to run custom queries on our database.
 
 ## Cross-Site Scripting
-Cross-Site Scripting(XSS) allows a threat actor to inject malicious code into webpages viewed by legitimate users. The attacker can use this vulnerability to execute code that accesses a user's sensitive information. There are three types of XSS attacks: Stored, DOM-Based, and Reflected. The scenario we'll be covering is a Reflected XSS attack.  
+Cross-Site Scripting(XSS) allows a threat actor to inject malicious code into webpages viewed by legitimate users. The threat actor can use this vulnerability to execute code that accesses a victim's sensitive information. There are three types of XSS attacks: Stored, DOM-Based, and Reflected. We'll cover the most common type of XSS attack, Reflected XSS.  
 
-In this Reflected XSS attack, the malicious JavaScript code is embedded in a URL that, when clicked by a user, runs on the user's browser and pulls their Session ID from the browser's cookies. 
+XSS can allow attackers to retrieve a user's cookie data. A commonly stored cookie value is the session ID, which is a cookie that allows a user to maintain their session on the website without having to log in again. If an attacker obtains a legitimate user's session ID, they can then spoof this cookie value and steal that victim's logged-in session. This way, the attacker effectively skips authentication and compromises a victim's account without even knowing their credentials. This is called Session Hijacking, which is the attack I'll be simulating.
+
+In this Reflected XSS attack scenario, the malicious JavaScript code is embedded in a URL that, when clicked by a user, runs on the user's browser and pulls their session ID from their browser's cookies.
