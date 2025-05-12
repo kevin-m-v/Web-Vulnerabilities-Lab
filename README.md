@@ -25,6 +25,11 @@ Instead of hard-coding the SQL syntax into the JavaScript code, we use a paramet
 ## Cross-Site Scripting
 Cross-Site Scripting(XSS) allows a threat actor to inject malicious code into webpages viewed by legitimate users. The threat actor can use this vulnerability to execute code that accesses a victim's sensitive information. There are three types of XSS attacks: Stored, DOM-Based, and Reflected. We'll cover the most common type of XSS attack, Reflected XSS.  
 
-XSS can allow attackers to retrieve a user's cookie data. A commonly stored cookie value is the session ID, which is a cookie that allows a user to maintain their session on the website without having to log in again. If an attacker obtains a legitimate user's session ID, they can then spoof this cookie value and steal that victim's logged-in session. This way, the attacker effectively skips authentication and compromises a victim's account without even knowing their credentials. This is called Session Hijacking, which is the attack I'll be simulating.
+XSS can allow attackers to retrieve a user's cookie data. A commonly stored cookie value is the session ID, which is a cookie that allows a user to maintain their session on the website without having to log in again. If an attacker obtains a legitimate user's session ID, they can spoof this cookie value and steal that victim's logged-in session. This way, the attacker effectively skips authentication and compromises a victim's account without knowing their credentials. This is called Session Hijacking.
 
-In this Reflected XSS attack scenario, the malicious JavaScript code is embedded in a URL that, when clicked by a user, runs on the user's browser and pulls their session ID from their browser's cookies.
+In the Reflected XSS scenario I'll be showing, we'll use a vulnerability in the user-inputted query field on the webpage to run malicious JavaScript code that extracts our session ID:
+
+
+https://github.com/user-attachments/assets/19c240f0-7086-42f7-b77b-2fd0cfe71f16
+
+
