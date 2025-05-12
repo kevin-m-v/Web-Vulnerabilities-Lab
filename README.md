@@ -26,10 +26,22 @@ Cross-Site Scripting(XSS) allows a threat actor to inject malicious code into we
 
 XSS can allow attackers to retrieve a user's cookie data. A commonly stored cookie value is the session ID, which is a cookie that allows a user to maintain their session on the website without having to log in again. If an attacker obtains a legitimate user's session ID, they can spoof this cookie value and steal that victim's logged-in session. This way, the attacker effectively skips authentication and compromises a victim's account without knowing their credentials. This is called Session Hijacking.
 
-In the Reflected XSS scenario I'll be showing, I use a vulnerability in the user-inputted query field on the webpage to run malicious JavaScript code that extracts our session ID:
+In the Reflected XSS scenario I'll be showing, I use a vulnerability in the user-inputted query field on the webpage to run JavaScript code that extracts our session ID:
 
 https://github.com/user-attachments/assets/19c240f0-7086-42f7-b77b-2fd0cfe71f16
 
 We can see in the recording that the query input appears within the URL as part of the parameters. Using social engineering techniques, an attacker could make a well-crafted email and trick users into clicking a URL that contains malicious code.  
 
-The way the attack works is by using an HTML image tag with an empty source, which will throw an error. Then, we can use the `onerror` function to run the injected JavaScript.
+The way the attack works is by using an HTML image tag with an empty source, which will throw an error. Then, we can use the `onerror` function to run the injected JavaScript code, which a threat actor can make such that the session ID is sent to their own site. The vulnerability here is that the user input for the query field on the webpage runs as HTML rather than plaintext([xss.html, line 37](https://github.com/kevin-m-v/Web-Vulnerabilities-Lab/blob/main/views/xss.html#L37)):
+
+```js
+document.getElementById('query-output').innerHTML = query
+```
+
+This line of code essentially allows any custom script to run on the website, as the browser will recognize the script as just part of the webpage. To prevent this, we need to ensure that the webpage only recognizes the *visible* text within the user input. We can do this by using `innerText` instead of `innerHTML`:
+
+```js
+document.getElementById('query-output').innerText = query
+```
+
+Unlike `innerHTML`, which retrieves the HTML markup within the element, `innerText` excludes the HTML tags and hidden content within the element. Thus, the `<img>` and `<script>` tags used for XSS will no longer be injected into the browser.
