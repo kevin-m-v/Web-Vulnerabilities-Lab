@@ -32,7 +32,7 @@ connection.query("INSERT INTO sql_injection (user, password) VALUES (?,?)",
 By using parameterization, special characters in the user input do not affect the underlying SQL syntax, mitigating the risk of an SQLi attack.
 
 ## Cross-Site Scripting
-Cross-Site Scripting(XSS) allows a threat actor to inject malicious code into webpages viewed by legitimate users. The threat actor can use this vulnerability to execute code that accesses a victim's sensitive information. There are three types of XSS attacks: Stored, DOM-Based, and Reflected. We'll cover the most common type of XSS attack, Reflected XSS.  
+Cross-Site Scripting(XSS) allows a threat actor to inject malicious code into webpages viewed by legitimate users. The threat actor can use this vulnerability to execute code that accesses a victim's sensitive information. There are three types of XSS attacks: Stored, DOM-Based, and Reflected. We'll cover the most common type, Reflected XSS.  
 
 One primary risk of XSS is session hijacking. XSS can allow attackers to retrieve a user's cookie data. A commonly stored cookie value for web applications is the session ID, which allows users to maintain their login state. If an attacker obtains a legitimate user's session ID, they can spoof the cookie value and impersonate the victim without needing their login credentials, effectively skipping the authentication step.
 
