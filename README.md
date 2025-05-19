@@ -4,7 +4,7 @@ Welcome to my cybersecurity lab, where I built a website from scratch to simulat
 **Disclaimer**: These techniques were done on a local instance of my website for educational purposes only. Using these hacking techniques on a live website without expressed written consent from the owner/admin is against the law.
 
 ## SQL Injection
-An SQL Injection(SQLi) attack occurs when a threat actor manipulates SQL queries through vulnerable user input fields on a website. This can lead to unauthorized access to sensitive information or even privilege escalation.  
+An SQL injection(SQLi) attack occurs when a threat actor manipulates SQL queries through vulnerable user input fields on a website. This can lead to unauthorized access to sensitive information or even privilege escalation.  
 
 First, let's quickly review how the user, web server, and database interact on my website. Consider this login process:
 1. **User Input**: A user enters their username and password into a website's login form.
@@ -32,7 +32,7 @@ connection.query("INSERT INTO sql_injection (user, password) VALUES (?,?)",
 By using parameterization, special characters in the user input do not affect the underlying SQL syntax, mitigating the risk of an SQLi attack.
 
 ## Cross-Site Scripting
-Cross-Site Scripting(XSS) allows a threat actor to inject malicious code into webpages viewed by legitimate users. The threat actor can use this vulnerability to execute code that accesses a victim's sensitive information. There are three types of XSS attacks: Stored, DOM-Based, and Reflected. We'll cover the most common type, Reflected XSS.  
+Cross-site scripting(XSS) allows a threat actor to inject malicious code into webpages viewed by legitimate users. The threat actor can use this vulnerability to execute code that accesses a victim's sensitive information. There are three types of XSS attacks: stored, DOM-based, and reflected. We'll cover the most common type, reflected XSS.  
 
 One primary risk of XSS is session hijacking. XSS can allow attackers to retrieve a user's cookie data. A commonly stored cookie value for web applications is the session ID, which allows users to maintain their login state. If an attacker obtains a legitimate user's session ID, they can spoof the cookie value and impersonate the victim without needing their login credentials, effectively skipping the authentication step.
 
