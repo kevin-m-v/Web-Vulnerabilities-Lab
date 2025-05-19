@@ -1,5 +1,5 @@
 # Web-Vulnerabilities-Lab
-Welcome to my cybersecurity lab, where I built a website from scratch to simulate attack scenarios. My goal was to gain practical, hands-on experience in identifying and mitigating common web vulnerabilities while exploring the perspectives of both the hacker and the developer. The tech stack I employed: HTML/CSS for the front-end, JavaScript with Node.js/Express.js for the middleware and back-end operations, and MySQL for the database. In this write-up, I'll cover SQL Injection and Cross-Site Scripting attacks, accompanied by video demonstrations. Thank you for engaging with this project; I hope it offers meaningful insights into the importance of web security.
+Welcome to my cybersecurity lab, where I built a website from scratch to simulate attack scenarios. My goal was to gain practical, hands-on experience in identifying and mitigating common web vulnerabilities while exploring the perspectives of both the hacker and the developer. The tech stack I employed: HTML/CSS for the front-end, JavaScript with Node.js/Express.js for the middleware and back-end operations, and MySQL for the database. In this write-up, I'll cover SQL Injection and Cross-Site Scripting attacks, accompanied by video demonstrations.
 
 **Disclaimer**: These techniques were done on a local instance of my website for educational purposes only. Using these hacking techniques on a live website without expressed written consent from the owner/admin is ILLEGAL.
 
@@ -11,7 +11,7 @@ First, let's quickly review how the user, web server, and database interact on m
 2. **Fetch Request**: The website’s API sends a POST request to the web server with the given credentials.
 3. **Verification**: The web server queries the database. If the query returns `NULL`, the user is denied access because the credential pair does not exist.  
 
-### How SQLi Works
+### SQLi Demonstration
 
 If the developer is not careful here, an attacker may be able to change the SQL query that reaches the database. Here is an example of an unsafe query([server.js, line 52](https://github.com/kevin-m-v/Web-Vulnerabilities-Lab/blob/main/server.js#L52)):
 ```js
@@ -42,9 +42,9 @@ In the scenario I'll be showing, I exploit a vulnerability in the user-inputted 
 
 https://github.com/user-attachments/assets/19c240f0-7086-42f7-b77b-2fd0cfe71f16
 
-We can see in the recording that the query input appears within the URL as part of the parameters. Using social engineering techniques, an attacker could make a well-crafted email and trick users into clicking a URL that contains malicious code.  
+As seen in the recording, the query input appears within the URL as part of the parameters. Using social engineering techniques, an attacker could make a well-crafted email and trick users into clicking a URL that contains malicious code.  
 
-The way the attack works is by using an HTML image tag with an empty source, which will throw an error. Then, we can use the `onerror` function to run the injected JavaScript code. The vulnerability here is that the user input for the query field on the webpage is rendered as HTML rather than plaintext([xss.html, line 37](https://github.com/kevin-m-v/Web-Vulnerabilities-Lab/blob/main/views/xss.html#L37)):
+The attack works by using an HTML image tag with an empty source, which will throw an error. Then, we can use the `onerror` function to run the injected JavaScript code. The vulnerability here is that the user input for the query field on the webpage is rendered as HTML rather than plaintext([xss.html, line 37](https://github.com/kevin-m-v/Web-Vulnerabilities-Lab/blob/main/views/xss.html#L37)):
 
 ```js
 document.getElementById('query-output').innerHTML = query
@@ -60,4 +60,7 @@ To mitigate this vulnerability, we need to ensure that the webpage only recogniz
 document.getElementById('query-output').innerText = query
 ```
 
-Unlike `innerHTML`, which retrieves the HTML markup within the element, `innerText` excludes the HTML tags and hidden content within the element. Thus, the `<img>` and `<script>` tags used for XSS will no longer be injected into the browser.
+Unlike `innerHTML`, which retrieves the HTML markup within the element, `innerText` excludes the HTML tags and hidden content within the element. Thus, the `<img>` and `<script>` tags used for XSS will no longer be injected into the browser.  
+
+## Conclusion
+These examples demonstrate how a single line of code can introduce critical vulnerabilities that often go undetected. Staying current with secure coding practices is essential for defending against SQL injection, cross-site scripting, and other common attack vectors. Thank you for engaging with this project; I trust it has provided valuable insights into the importance of web security.
