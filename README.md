@@ -1,5 +1,5 @@
 # Web-Vulnerabilities-Lab
-Welcome to my cybersecurity lab, where I built a website from scratch to simulate attack scenarios. My goal was to gain practical, hands-on experience in identifying and mitigating common web vulnerabilities while exploring the perspectives of both the hacker and the developer. The tech stack I employed: HTML/CSS for the front-end, JavaScript with Node.js/Express.js for the middleware and back-end operations, and MySQL for the database. In this writeup, I'll cover SQL Injection and Cross-Site Scripting attacks, accompanied by video demonstrations.
+Welcome to my cybersecurity lab, where I built a website from scratch to simulate attack scenarios. My goal was to gain practical, hands-on experience in identifying and mitigating common web vulnerabilities while exploring the perspectives of both the hacker and the developer. The tech stack I employed: HTML/CSS for the front-end, JavaScript with Node.js/Express.js for the middleware and back-end operations, and MySQL for the database. In this write-up, I'll cover SQL Injection and Cross-Site Scripting attacks, accompanied by video demonstrations.
 
 **Disclaimer**: These techniques were done on a local instance of my website for educational purposes only. Using these hacking techniques on a live website without expressed written consent from the owner/admin is against the law.
 
@@ -9,7 +9,7 @@ An SQL injection(SQLi) attack occurs when a threat actor manipulates SQL queries
 First, let's quickly review how the user, web server, and database interact on my website. Consider this login process:
 1. **User Input**: A user enters their username and password into a website's login form.
 2. **Fetch Request**: Through the website’s API, the user sends a POST request to the web server with the given credentials.
-3. **Verification**: The web server queries the database for the provided credentails. If the query returns `NULL`, the user is denied access because the credential pair does not exist.  
+3. **Verification**: The web server queries the database for the provided credentials. If the query returns `NULL`, the user is denied access because the credential pair does not exist.  
 
 ### SQLi Demonstration
 
